@@ -30,7 +30,7 @@ let createListWithTwoPows m n =
 
 let powers = createListWithTwoPows 1 2
 
-let reversed = reverseList [ 1 .. 4 ]
+let reversed = reverseList [ 1 .. 5 ]
 
 [<EntryPoint>]
 let main argv = 
