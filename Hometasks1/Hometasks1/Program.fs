@@ -26,9 +26,12 @@ let createListWithTwoPows m n =
         | -1 -> [] 
         | _ -> numberToAdd :: getResutList (numberToAdd * 2) (k - 1)
     let rec powerInto n =
-        match n with
-        | 0 -> 1
-        | _ -> 2 * powerInto(n - 1)
+        if n = 0 then 1
+        else 
+        let halfPower = powerInto (n / 2)
+        match n % 2 with
+        | 0 -> halfPower * halfPower
+        | _ -> 2 * halfPower * halfPower
     getResutList (powerInto n) m
 
 let powers = createListWithTwoPows 2 2
