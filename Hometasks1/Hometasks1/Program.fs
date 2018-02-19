@@ -21,14 +21,17 @@ let reverseList list =
     reverse list []
 
 let createListWithTwoPows m n =
-    let rec twoIntoThisPower x =
-        match x with
+    let rec getResutList numberToAdd k = 
+        match k with
+        | -1 -> [] 
+        | _ -> numberToAdd :: getResutList (numberToAdd * 2) (k - 1)
+    let rec powerInto n =
+        match n with
         | 0 -> 1
-        | _ -> 2 * twoIntoThisPower (x - 1)
-    [ n .. m + n] 
-    |> List.map twoIntoThisPower
+        | _ -> 2 * powerInto(n - 1)
+    getResutList (powerInto n) m
 
-let powers = createListWithTwoPows 1 2
+let powers = createListWithTwoPows 2 2
 
 let reversed = reverseList [ 1 .. 5 ]
 
