@@ -11,9 +11,9 @@ let product = productOfDigits 241
 let firstAppearanceInList list n =
     let rec firstAppearanceInList' list n counter =
         match list with
-        | h :: tail when h = n -> counter + 1
+        | h :: tail when h = n -> Some(counter + 1)
         | h :: tail -> firstAppearanceInList' tail n (counter + 1)
-        | _ -> -1
+        | _ -> None
     firstAppearanceInList' list n 0
 
 let count = firstAppearanceInList [1; 2; 3; 4] 2
