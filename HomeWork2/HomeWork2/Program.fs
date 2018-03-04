@@ -1,10 +1,11 @@
 ﻿// Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
 
-let rec productOfDigits n = 
+let rec productOfDigits x =
+    let n = abs x
     match n with
-    | 0 -> 0
-    | _ -> (productOfDigits (n / 10)) + n % 10
+    | d when d >=0 && d <=9 -> d  
+    | _ -> (productOfDigits (n / 10)) * (n % 10)
 
 let product = productOfDigits 241
 
