@@ -4,30 +4,31 @@ module Numbers =
 
         open Microsoft.FSharp.Core.Option
 
-        let countEven1 list =
-            let func x = if x % 2 = 0 then 0 else 1
+        let countEvenWithMap list =
+            let func x = if x % 2 = 0 then 1 else 0
             List.map func list |> List.sum
 
-        let countEven2 list = 
+        let countEvenWithFilter list = 
             List.filter (fun x -> x % 2 = 0) list |> List.length
 
-        let countEven3 list =
+        let countEvenWithFold list =
             let newState state x = if x % 2 = 0 then state + 1 else state
             List.fold newState 0 list
 
         let primes =  
-            let isPrime x seq = Seq.tryFind (fun i -> x % i = 0) seq |> isNone
+            let isPrime (x : int) seq = Seq.tryFind (fun i -> x % i = 0) seq |> isNone
             seq {
                 yield 2
                 let getPrime listOfPrimes i = 
-                    if isPrime i listOfPrimes then i
-                    else -1
+                    match i with
+                    | Some(x) -> if isPrime x listOfPrimes then Some(x) else None
+                    | _ -> None
                 let unionWithIfNotNull i list = 
                     match i with
-                    | -1 -> list
-                    | x -> x :: list
-                let res = (Seq.unfold (fun (state, i) -> Some(getPrime state i, ((unionWithIfNotNull i state), i + 1))) ([2], 3)
-                |> Seq.filter(fun i -> i <> -1))
+                    | None -> list
+                    | Some(x) -> x :: list 
+                let res = (Seq.unfold (fun (state, i) -> Some(getPrime state i, ((unionWithIfNotNull i state), Some(i.Value + 1)))) ([2], Some(3))
+                |> Seq.filter(fun i -> i <> None)) |> Seq.choose id 
                 yield! res
                 }
 
