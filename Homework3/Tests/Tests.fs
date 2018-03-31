@@ -46,10 +46,7 @@ let ``Check that map is Ok``() =
 
 [<Test>]
 let ``Check empty & one element tree mapping``() =
-    let emptyTree = NullTree
     let f = (+) 1
-    let emptyTreeAfterMapping = map f emptyTree
-    emptyTreeAfterMapping |> should equal (NullTree : Tree<int>)
     let oneElementTree = Tip(1)
     let oneElementTreeAfterMapppig = map f oneElementTree  
     oneElementTreeAfterMapppig |> should equal (Tip(2))

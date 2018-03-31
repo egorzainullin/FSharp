@@ -5,13 +5,11 @@ module Tree =
     type Tree<'T> = 
         | Tip of 'T
         | Tree of 'T * Tree<'T> * Tree<'T>
-        | NullTree
 
     let rec map (f : 'a -> 'b) tree = 
         match tree with
         | Tip t -> Tip(f t)
         | Tree (node, left, right) -> Tree(f node, map f left, map f right)
-        | NullTree -> NullTree
 
     type Expression =
         | Operand of int
