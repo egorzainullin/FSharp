@@ -55,11 +55,11 @@ let ``Check empty & one element tree mapping``() =
     oneElementTreeAfterMapppig |> should equal (Tip(2))
 
 [<Test>]
-let ``Check mapping into another type`` =
+let ``Check mapping into another type``() =
     let tree = Tree(3, Tree(1, Tip(2), Tip(3)), Tree(2, Tip(1), Tip(3)))
     let f x = x.ToString()
     let newTree = map f tree
-    newTree |> should equal (Tree("6", Tree("2", Tip("4"), Tip("6")), Tree("4", Tip("2"), Tip("6"))))
+    newTree |> should equal (Tree("3", Tree("1", Tip("2"), Tip("3")), Tree("2", Tip("1"), Tip("3"))))
 
 [<Test>]
 let ``Calculate Expression``() =
