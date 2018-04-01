@@ -42,7 +42,13 @@ let betaTransform term =
         | Variable(x) -> (Variable(x), false)
     betaTransform' term |> fst
 
-let one = betaTransform example |> printfn "%A" 
+let term1 = Application(Lambda("y", Lambda("x", Application(Variable("x"), Variable("y")))), Variable("d"))
+
+let idId = Lambda("x", Application(Lambda("x", Variable("x")), Variable("x"))) 
+
+do printToConsole idId
+
+do betaTransform idId |> printToConsole
 
 [<EntryPoint>]
 let main argv = 
