@@ -34,3 +34,20 @@ let ``test complex substitute``() =
     let substitution = Variable("z")
     let term = Lambda("y", Application(Variable("x"), Variable("y")))
     (substitute "x" substitution term) |> should equal (Lambda("y", Application(Variable("z"), Variable("y"))))
+
+[<Test>]
+let ``check that finding free vars is OK``() =
+    Application(Lambda("x", Variable("x")), Variable("y"))
+    |> findFreeVars
+    |> should equal (Set.singleton "y")
+
+[<Test>]
+let ``check that renameing is OK``() = 
+    substitute "y" (Variable("x")) (Application(Lambda("x", Application(Variable("a"), Variable("y"))), Variable("y")))
+    |> should equal (Application(Lambda ("b",Application (Variable("a"), Variable("x"))), Variable("x")))
+
+[<Test>]
+let ``check that betatrnasfrom with renaming os OK``() =
+    Application(Lambda("x", Lambda("y", Variable("x"))), Variable("y"))
+    |> betaTransform
+    |> should equal (Lambda("a", Variable("y")))
