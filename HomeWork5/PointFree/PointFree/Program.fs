@@ -13,7 +13,10 @@ module PointFree =
     
     do f3 2 [1; 2; 3] |> printfn "%A" 
 
+    open Brackets
+
     [<EntryPoint>]
-    let main argv = 
+    let main argv =
+        "([)]" |> IsCorrectBracketSeq |> printfn "%A"
         printfn "%A" argv
         0 // return an integer exit code
