@@ -9,14 +9,14 @@ module PointFree =
 
     let f2 x = List.map ((*) x)
     
-    let f3 = List.map << (*)
-    
-    do f3 2 [1; 2; 3] |> printfn "%A" 
+    let f3 = List.map << (*)     
 
     open Brackets
 
+    open Telephone
+
     [<EntryPoint>]
     let main argv =
-        "([)]" |> IsCorrectBracketSeq |> printfn "%A"
-        printfn "%A" argv
+        let l = [("89", "Alex"); ("89", "Susan"); ("56", "Max")]
+        interactive l |> ignore       
         0 // return an integer exit code

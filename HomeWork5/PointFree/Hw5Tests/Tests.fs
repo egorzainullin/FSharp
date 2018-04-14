@@ -34,3 +34,31 @@ let ``check brackets seq is OK``() =
 [<Test>]
 let ``complex brackets checking``() =
     "(()[]){((()))}[[()]]" |> IsCorrectBracketSeq |> should equal true
+
+open Telephone
+
+let l = [("89", "Alex"); ("89", "Susan"); ("56", "Max")]
+
+[<Test>]
+let ``test adding``() =
+    let func phone name list = List.length (addToBase phone name list) = (List.length list) + 1
+    Check.QuickThrowOnFailure func
+
+[<Test>]
+let ``test finding by phone``() =
+    findNameByPhone "89" l |> List.sort |> should equal ["Alex"; "Susan"]
+    findNameByPhone "89" [] |> should equal []
+
+[<Test>]
+let ``test finding by name``() = 
+    let list = l @ [("99", "Susan")]
+    findPhoneByName "Susan" list |> List.sort |> should equal ["89"; "99"]
+    findNameByPhone "Someone" [] |> should equal []
+
+[<Test>]
+let ``saving & loading testing``() =
+    let func (l : (string * string) list) = 
+        saveToFile l
+        let list = readFromFile "output.dat"
+        List.sort list = List.sort l
+    Check.QuickThrowOnFailure func
