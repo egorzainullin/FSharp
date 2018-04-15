@@ -9,23 +9,41 @@ module BinaryTree =
         | Null
         | TreeElement of 'T * TreeElement<'T> * TreeElement<'T>
 
+    /// <summary>
+    /// IEnumerable collection that allow to add, remove, search elements for o(log(n)) 
+    /// </summary>
     type Tree<'T when 'T : comparison>(initSeq) =
+        /// Head of the tree
         let mutable head = TreeElement.Null
+        /// Count of elements in tree
         let mutable count = 0
-
+        
+        /// IEnumerable interface that gets enumerator
         interface IEnumerable<'T> with
+            /// <summary>
+            /// Gets generic enumerator
+            /// </summary>
             member this.GetEnumerator(): IEnumerator<'T> = 
-                let seq = this.GetSeq
+                let seq = this.GetSeq()
                 seq.GetEnumerator()
             
+            /// <summary>
+            /// Gets ordinary enumerator
+            /// </summary>
             member this.GetEnumerator(): System.Collections.IEnumerator = 
-                let seq = this.GetSeq
+                let seq = this.GetSeq()
                 seq.GetEnumerator() :> IEnumerator            
         
+        /// <summary>
+        /// Gets count of elements
+        /// </summary>
         member this.Count 
             with get() = count
         
-        member this.GetSeq = 
+        /// <summary>
+        /// To seq
+        /// </summary>
+        member this.GetSeq() = 
             let rec getValues head = seq {
                 match head with
                 | Null -> yield! Seq.empty
@@ -34,7 +52,11 @@ module BinaryTree =
                                                      yield! getValues right
             }
             getValues head
-
+        
+        /// <summary>
+        /// Adds value to collection
+        /// </summary>
+        /// <param name="value">Value to add</param>
         member this.Add value = 
             let rec add head value = 
                 match head with
@@ -45,6 +67,10 @@ module BinaryTree =
                           TreeElement(value, Null, Null)
             head <- add head value
         
+        /// <summary>
+        /// Checks containment of value
+        /// </summary>
+        /// <param name="value">Value to check</param>
         member this.IsContains value = 
             let rec isContains head value =
                 match head with
@@ -54,15 +80,20 @@ module BinaryTree =
                                                          else isContains right value
             isContains head value
         
+        /// <summary>
+        /// Removes value from collection
+        /// </summary>
+        /// <param name="value">Value to remove</param>
+        /// <exception cref="ArgumentException">Throws when value does not exist</exception>
         member this.Remove value =  
             let rec getRightTip head =
                 match head with
-                | Null -> failwith "head is null"
+                | Null -> raise (ArgumentException("head is null"))
                 | TreeElement(value, Null, Null) -> value
                 | TreeElement(_, _, right) -> getRightTip right
             let rec remove head value = 
                 match head with
-                | Null -> failwith "element is not found"
+                | Null -> raise (ArgumentException("element is not found"))
                 | TreeElement (headValue, left, right) as x -> 
                     if value < headValue then TreeElement(headValue, remove left value, right)
                     elif value > headValue then TreeElement(headValue, left, remove right value)
@@ -74,6 +105,7 @@ module BinaryTree =
                         | TreeElement(_, left, right) -> let tip = getRightTip left 
                                                          TreeElement(tip, remove left tip, right)
                         | Null -> failwith "head is null"
+            count <- count - 1
             head <- remove head value
 
     [<EntryPoint>]
@@ -87,7 +119,7 @@ module BinaryTree =
         tree.Remove(7)
         tree.IsContains(7) |> printfn "%A"
         tree.IsContains(5) |> printfn "%A"
-        tree.GetSeq |> Seq.toList |> List.sort |> printfn "%A"
+        tree.GetSeq() |> Seq.toList |> List.sort |> printfn "%A"
         let mutable seq = Seq.empty
         for i in tree do seq <- Seq.append [i] seq
         seq |> Seq.toList |> List.sort |> printfn "%A"
