@@ -4,6 +4,7 @@ module BinaryTree =
     open System.Collections.Generic
     open System.Collections
     open System
+    open HomeWork6
     
     type internal TreeElement<'T> = 
         | Null
@@ -12,7 +13,7 @@ module BinaryTree =
     /// <summary>
     /// IEnumerable collection that allow to add, remove, search elements for o(log(n)) 
     /// </summary>
-    type Tree<'T when 'T : comparison>(initSeq) =
+    type Tree<'T when 'T : comparison>() =
         /// Head of the tree
         let mutable head = TreeElement.Null
         /// Count of elements in tree
@@ -108,6 +109,8 @@ module BinaryTree =
             count <- count - 1
             head <- remove head value
 
+    open Robots
+                
     [<EntryPoint>]
     let main argv = 
         printfn "%A" argv
@@ -124,4 +127,9 @@ module BinaryTree =
         for i in tree do seq <- Seq.append [i] seq
         seq |> Seq.toList |> List.sort |> printfn "%A"
         do Console.WriteLine()
+        let comps = [Machine("Linux", 0.4, false); Machine("Mac", 0.2, false); Machine("Windows", 0.8, false)]
+        let matrix = [[true; false; true]
+                      [false; true; true]
+                      [true; true; true]]
+        let net = new Net(comps, matrix)
         0 // return an integer exit code
