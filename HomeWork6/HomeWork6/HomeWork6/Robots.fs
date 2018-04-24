@@ -11,7 +11,7 @@ module Robots =
 
         member val Possibility = possibility
 
-        member val IsInfected = isInfectedMutable
+        member this.IsInfected with get() = isInfectedMutable
 
         member this.SetInfected() = isInfectedMutable <- true
 
@@ -23,7 +23,7 @@ module Robots =
 
         let convertToBool() = Array.map (fun (x : Machine) -> x.IsInfected) computers
 
-        member val InfectedComputers = convertToBool()
+        member this.InfectedComputers with get() = convertToBool()
 
         member this.NewTurn() = 
             let state = convertToBool()
@@ -33,7 +33,7 @@ module Robots =
                     if valueFromRandom <= computers.[x].Possibility then computers.[x].SetInfected()
             let infectList i list = list |> List.indexed
                                     |> List.filter snd |> List.map fst |> List.map (infect i)
-            List.mapi infectList graph
+            List.mapi infectList graph |> ignore
 
         member this.IsEndOfProcess() = 
             let temp = convertToBool()

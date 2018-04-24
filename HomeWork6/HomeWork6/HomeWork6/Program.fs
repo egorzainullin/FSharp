@@ -127,9 +127,13 @@ module BinaryTree =
         for i in tree do seq <- Seq.append [i] seq
         seq |> Seq.toList |> List.sort |> printfn "%A"
         do Console.WriteLine()
-        let comps = [Machine("Linux", 0.4, false); Machine("Mac", 0.2, false); Machine("Windows", 0.8, false)]
+        let comps = [Machine("Linux", 0.4, true); Machine("Mac", 0.2, false); Machine("Windows", 0.8, false)]
         let matrix = [[true; false; true]
                       [false; true; true]
                       [true; true; true]]
         let net = new Net(comps, matrix)
+        for i in [1 .. 10] do
+            net.NewTurn()
+            printfn "%A" net.InfectedComputers
+        net.IsEndOfProcess() |> printfn "%A"
         0 // return an integer exit code
