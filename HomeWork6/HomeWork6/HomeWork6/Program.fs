@@ -109,7 +109,7 @@ module BinaryTree =
             count <- count - 1
             head <- remove head value
 
-    open Robots
+    open Net
                 
     [<EntryPoint>]
     let main argv = 

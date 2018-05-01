@@ -52,7 +52,9 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Tests.fs" />
+    <Compile Include="FakeRandom.fs" />
+    <Compile Include="NetTests.fs" />
+    <Compile Include="TreeTests.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
