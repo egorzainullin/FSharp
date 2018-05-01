@@ -25,28 +25,9 @@ type StringConvertBuilder() =
         | None -> None
      member this.Return(x) = Some(x)    
 
-let converter = new StringConvertBuilder()
-
-let z = converter { 
-    let! x = "1"
-    let! y = "2"        
-    let z = x + y
-    return z }
-
-let z1 = converter { 
-    let! x = "1"
-    let! y = "a"        
-    let z = x + y
-    return z }
-
-printfn "%A" z
-printfn "%A" (z1 = None)
-
 let convertToExactPrecise x numberOfDigits = 
     let z = (float) (pown 10 numberOfDigits)
     x * z |> round |> (/) <| z
-
-printfn "%A" (convertToExactPrecise 10.0101 2)
 
 type PreciseBuilder(precise) = 
      new() = PreciseBuilder(0)
@@ -54,14 +35,6 @@ type PreciseBuilder(precise) =
      member this.Return(x) = convertToExactPrecise x precise   
 
 let preciseCalculation x = new PreciseBuilder(x)
-
-let n = preciseCalculation 3{
-    let! a = 2.0 / 12.0
-    let! b = 3.5
-    return a / b
-    }
-
-printfn "%A" n
 
 [<EntryPoint>]
 let main argv = 
