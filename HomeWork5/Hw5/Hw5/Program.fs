@@ -18,5 +18,5 @@ module PointFree =
     [<EntryPoint>]
     let main argv =
         let l = [("89", "Alex"); ("89", "Susan"); ("56", "Max")]
-        interactive l |> ignore       
+        interactive l |> ignore
         0 // return an integer exit code

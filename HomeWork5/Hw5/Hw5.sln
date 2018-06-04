@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hw5", "PointFree\Hw5.fsproj", "{8D21A665-2ACB-4B3A-BD99-C34B7509A012}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hw5", "Hw5\Hw5.fsproj", "{8D21A665-2ACB-4B3A-BD99-C34B7509A012}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hw5Tests", "Hw5Tests\Hw5Tests.fsproj", "{45B02358-A28A-43FD-803F-D978725A39A7}"
 EndProject

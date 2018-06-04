@@ -26,14 +26,14 @@ let ``check equality 3``() =
 
 [<Test>]
 let ``check brackets seq is OK``() =
-    "()[][{}]" |> IsCorrectBracketSeq |> should equal true
-    "" |> IsCorrectBracketSeq |> should equal true
-    "([)]" |> IsCorrectBracketSeq |> should equal false
-    "((()))" |> IsCorrectBracketSeq |> should equal true
+    "()[][{}]" |> isCorrectBracketSeq |> should equal true
+    "" |> isCorrectBracketSeq |> should equal true
+    "([)]" |> isCorrectBracketSeq |> should equal false
+    "((()))" |> isCorrectBracketSeq |> should equal true
 
 [<Test>]
 let ``complex brackets checking``() =
-    "(()[]){((()))}[[()]]" |> IsCorrectBracketSeq |> should equal true
+    "(()[]){((()))}[[()]]" |> isCorrectBracketSeq |> should equal true
 
 open Telephone
 
