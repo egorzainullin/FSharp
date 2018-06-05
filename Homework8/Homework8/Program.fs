@@ -6,10 +6,6 @@ open System
 open System.IO
 open System.Net
 
-let link = @"../../example.html"
-
-let text = Array.fold (fun state i -> state + "/n" + i) "" (System.IO.File.ReadAllLines(link)) 
-
 let getAllHrefs htmlText = 
     let pattern = "<a\\shref\\s*=\\s*\"http://(?:(?<1>[^\"']*)\"|(?<1>\\S+))"
     let matched = Regex.Match(htmlText, pattern, RegexOptions.IgnoreCase, TimeSpan.FromSeconds(0.5))
@@ -35,9 +31,7 @@ let loadPagesAndPrintNumberParallel (url : string) =
     use reader = new StreamReader(stream)
     let html = reader.ReadToEnd()
     let pages = getAllHrefs html
-    pages |> (List.map printNumberOfSymbolsAsync) |> Async.Parallel |> Async.RunSynchronously
-       
-getAllHrefs text |> printfn "%A"
+    pages |> (List.map printNumberOfSymbolsAsync) |> Async.Parallel |> Async.RunSynchronously   
 
 [<EntryPoint>]
 let main argv = 
