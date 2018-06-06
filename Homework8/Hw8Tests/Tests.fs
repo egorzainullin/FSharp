@@ -7,7 +7,6 @@ module Tests =
     
     [<Test>]
     let ``check that finding urls is ok``() = 
-        let dir = System.IO.Directory.GetCurrentDirectory()
         let link = @"Hw8Tests/example.html"
         let text = Array.fold (fun state i -> state + "/n" + i) "" (System.IO.File.ReadAllLines(link))    
         getAllHrefs text |> List.item 1 |> should equal "http://yandex.ru"

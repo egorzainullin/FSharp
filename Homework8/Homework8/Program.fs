@@ -16,22 +16,26 @@ let getAllHrefs htmlText =
     getListOfMatched matched []
 
 let loadPagesAndPrintNumberParallel (url : string) =
+    let getHtml (response : WebResponse) =
+        use stream = response.GetResponseStream()
+        use reader = new StreamReader(stream)
+        reader.ReadToEnd()
     let printNumberOfSymbolsAsync (page : string) = 
         async {
-            let request = WebRequest.Create(page)
-            use! response = request.AsyncGetResponse()
-            use stream = response.GetResponseStream()
-            use reader = new StreamReader(stream)
-            let html = reader.ReadToEnd()
-            return (page, html.Length)
+            try 
+                let request = WebRequest.Create(page)
+                use! response = request.AsyncGetResponse() 
+                let html = getHtml response    
+                return Some((page, html.Length))
+            with 
+            | e -> return None
         }
     let request = WebRequest.Create(url)
     let response = request.GetResponse()
-    use stream = response.GetResponseStream()
-    use reader = new StreamReader(stream)
-    let html = reader.ReadToEnd()
+    let html = getHtml response 
     let pages = getAllHrefs html
-    pages |> (List.map printNumberOfSymbolsAsync) |> Async.Parallel |> Async.RunSynchronously   
+    pages |> (List.map printNumberOfSymbolsAsync) |> Async.Parallel |> Async.RunSynchronously |> Array.toList
+    |> List.choose id
 
 [<EntryPoint>]
 let main argv = 
