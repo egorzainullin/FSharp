@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Homework8", "Homework8\Homework8.fsproj", "{5A79CD7C-16E2-4399-9648-3D64E17691BC}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hw8Tests", "Hw8Tests\Hw8Tests.fsproj", "{39125FB2-8D9A-477A-899E-42795E92E470}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A79CD7C-16E2-4399-9648-3D64E17691BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A79CD7C-16E2-4399-9648-3D64E17691BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A79CD7C-16E2-4399-9648-3D64E17691BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A79CD7C-16E2-4399-9648-3D64E17691BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39125FB2-8D9A-477A-899E-42795E92E470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39125FB2-8D9A-477A-899E-42795E92E470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39125FB2-8D9A-477A-899E-42795E92E470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39125FB2-8D9A-477A-899E-42795E92E470}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35867E57-0B72-4EBB-B7AF-65F221AF60E9}
+	EndGlobalSection
+EndGlobal
